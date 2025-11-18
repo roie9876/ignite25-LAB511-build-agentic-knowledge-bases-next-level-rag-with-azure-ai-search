@@ -34,4 +34,4 @@ Your feedback helps us improve our labs for future events. Please take a moment 
 
 **Ignite Feedback:** [https://aka.ms/ignite25-feedback](https://aka.ms/ignite25-feedback)
 
-**Lab Content Feedback:** [https://aka.ms/ignite25-LAB511](https://aka.ms/ignite25-LAB511)
+**Lab Content Feedback:** Please open an issue in the following repo [https://aka.ms/ignite25-LAB511](https://aka.ms/ignite25-LAB511)
