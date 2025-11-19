@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourcePrefix": {
+      "value": "lab511"
+    },
+    "location": {
+      "value": "westcentralus"
+    },
+    "storageAccountSku": {
+      "value": "Standard_RAGRS"
+    },
+    "searchServiceSku": {
+      "value": "standard"
+    },
+    "openAiSku": {
+      "value": "S0"
+    },
+    "aiServicesSku": {
+      "value": "S0"
+    },
+    "multiAiServicesSku": {
+      "value": "S0"
+    },
+    "embeddingModelName": {
+      "value": "text-embedding-3-large"
+    },
+    "embeddingModelVersion": {
+      "value": "1"
+    },
+    "embeddingModelCapacity": {
+      "value": 30
+    },
+    "gpt41ModelName": {
+      "value": "gpt-4.1"
+    },
+    "gpt41ModelVersion": {
+      "value": "2025-04-14"
+    },
+    "gpt41Capacity": {
+      "value": 50
+    }
+  }
+}

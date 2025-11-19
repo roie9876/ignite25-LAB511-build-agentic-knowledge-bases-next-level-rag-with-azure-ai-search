@@ -30,6 +30,14 @@ By the end of this session, learners will be able to:
 - **[Azure SDK for Python](https://learn.microsoft.com/python/api/overview/azure/)** - `azure-search-documents`, `azure-identity`, `azure-storage-blob`
 - **[Visual Studio Code](https://code.visualstudio.com/)** - Development environment with Jupyter notebook support
 
+### Deploy to Your Own Azure Subscription
+
+Want to run this lab on your own Azure subscription? Follow the instructions below to deploy the infrastructure and set up the environment.
+
+**⏱️ Total time: ~20-25 minutes for setup + 60-90 minutes for notebooks**
+
+👉 **[Start here: Deploy Yourself Guide](./infra/deploy-yourself/README.md)**
+
 ### 📚 Resources and Next Steps
 
 | Resources          | Links                             | Description        |
