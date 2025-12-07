@@ -70,8 +70,8 @@ OPENAI_ENDPOINT=$(az cognitiveservices account show --resource-group "$RESOURCE_
 OPENAI_KEY=$(az cognitiveservices account keys list --resource-group "$RESOURCE_GROUP" --name "$OPENAI_SERVICE_NAME" --query key1 -o tsv)
 echo "✓ Azure OpenAI: $OPENAI_SERVICE_NAME"
 
-# Get AI Services (CognitiveServices kind)
-AI_SERVICE_NAME=$(az cognitiveservices account list --resource-group "$RESOURCE_GROUP" --query "[?kind=='CognitiveServices'].name | [0]" -o tsv)
+# Get AI Services (AIServices kind - required for Content Understanding)
+AI_SERVICE_NAME=$(az cognitiveservices account list --resource-group "$RESOURCE_GROUP" --query "[?kind=='AIServices'].name | [0]" -o tsv)
 if [ -z "$AI_SERVICE_NAME" ]; then
     echo "✗ No AI Services found in resource group"
     exit 1
@@ -87,7 +87,23 @@ if [ -z "$STORAGE_ACCOUNT_NAME" ]; then
     exit 1
 fi
 BLOB_CONNECTION_STRING=$(az storage account show-connection-string --resource-group "$RESOURCE_GROUP" --name "$STORAGE_ACCOUNT_NAME" --query connectionString -o tsv)
+BLOB_ACCOUNT_URL="https://${STORAGE_ACCOUNT_NAME}.blob.core.windows.net"
+BLOB_RESOURCE_ID=$(az storage account show --resource-group "$RESOURCE_GROUP" --name "$STORAGE_ACCOUNT_NAME" --query id -o tsv)
 echo "✓ Storage Account: $STORAGE_ACCOUNT_NAME"
+
+# Ensure the signed-in identity has Storage Blob Data Contributor on the storage account (best effort)
+SIGNED_IN_OBJECT_ID=$(az ad signed-in-user show --query id -o tsv 2>/dev/null || true)
+STORAGE_SCOPE="/subscriptions/$(az account show --query id -o tsv)/resourceGroups/$RESOURCE_GROUP/providers/Microsoft.Storage/storageAccounts/$STORAGE_ACCOUNT_NAME"
+if [ -n "$SIGNED_IN_OBJECT_ID" ]; then
+    echo "Granting 'Storage Blob Data Contributor' to the signed-in identity on $STORAGE_ACCOUNT_NAME..."
+    if az role assignment create --assignee-object-id "$SIGNED_IN_OBJECT_ID" --role "Storage Blob Data Contributor" --scope "$STORAGE_SCOPE" >/dev/null 2>&1; then
+        echo "✓ Role assignment added (may take a few minutes to propagate)"
+    else
+        echo "⚠️  Could not add role assignment automatically. If uploads fail with AuthorizationPermissionMismatch, assign 'Storage Blob Data Contributor' to this identity on $STORAGE_ACCOUNT_NAME."
+    fi
+else
+    echo "⚠️  Could not detect signed-in object id. If uploads fail with AuthorizationPermissionMismatch, assign 'Storage Blob Data Contributor' to your identity on $STORAGE_ACCOUNT_NAME."
+fi
 
 # Create .env file
 echo ""
@@ -98,7 +114,9 @@ AZURE_SEARCH_SERVICE_ENDPOINT=$SEARCH_ENDPOINT
 AZURE_SEARCH_ADMIN_KEY=$SEARCH_ADMIN_KEY
 
 # Azure Blob Storage Configuration
+BLOB_ACCOUNT_URL=$BLOB_ACCOUNT_URL
 BLOB_CONNECTION_STRING=$BLOB_CONNECTION_STRING
+BLOB_RESOURCE_ID=$BLOB_RESOURCE_ID
 BLOB_CONTAINER_NAME=documents
 SEARCH_BLOB_DATASOURCE_CONNECTION_STRING=$BLOB_CONNECTION_STRING
 
