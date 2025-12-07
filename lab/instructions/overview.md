@@ -25,7 +25,7 @@ If you need to sign in to any Azure or Microsoft 365 apps, use the following cre
 
 In this hands-on lab, you'll build a knowledge base using agentic retrieval in Azure AI Search. Unlike traditional search or basic RAG systems that simply return documents, an agentic knowledge base plans how and where to search, chooses the most relevant knowledge sources, and synthesizes grounded, citation-backed responses tailored to the user's intent.
 
-Through 8 progressive exercises, you'll explore multiple retrieval patterns across different data sources (search indexes, SharePoint, web, blob storage), experiment with answer synthesis strategies, and optimize performance by adjusting reasoning effort levels.
+Through 9 progressive exercises, you'll explore multiple retrieval patterns across different data sources (search indexes, SharePoint, web, blob storage), experiment with answer synthesis strategies, and optimize performance by adjusting reasoning effort levels. Parts 3 and 3B both use SharePoint: Part 3 shows the remote (live-permission) pattern, and Part 3B shows the indexed (high-performance, citation-rich) pattern—run Part 3B immediately after Part 3.
 
 ## Getting Started
 
@@ -160,21 +160,22 @@ If you encounter errors related to the GPT model when running notebook cells:
 
 ### Start with Jupyter Notebooks
 
-This lab includes 8 progressive notebooks covering different knowledge base patterns:
+This lab includes 9 progressive notebooks covering different knowledge base patterns (follow the order below so Part 3B runs right after Part 3):
 
 1. **Basic Knowledge Base** - Connect indexed data, configure Azure OpenAI, generate cited answers
 2. **Multiple Knowledge Sources** - Query across indexes with custom instructions
-3. **SharePoint Integration** - Real-time document retrieval from SharePoint
-4. **Web Sources** - Combine internal and external content
-5. **Blob Storage** - Upload and index with minimal vs. semantic strategies
-6. **Combined Sources** - Unified querying across multiple source types
-7. **Minimal Reasoning** - Speed-optimized retrieval
-8. **Medium Reasoning** - Balanced query decomposition
+3. **SharePoint Integration (Remote)** - Real-time document retrieval from SharePoint with live permissions
+4. **Indexed SharePoint (Part 3B, formerly Part 9)** - High-performance SharePoint indexing for faster search, richer citations, and scheduling
+5. **Web Sources** - Combine internal and external content
+6. **Blob Storage** - Upload and index with minimal vs. semantic strategies
+7. **Combined Sources** - Unified querying across multiple source types
+8. **Minimal Reasoning** - Speed-optimized retrieval
+9. **Medium Reasoning** - Balanced query decomposition
 
-Start with **part1-basic-knowledge-base.ipynb** in the **notebooks/** folder and progress through each notebook sequentially.
+Start with **part1-basic-knowledge-base.ipynb** in the **notebooks/** folder and progress through each notebook sequentially following the order above (1, 2, 3, 3B, 4, 5, 6, 7, 8).
 
 ### Complete the Lab
 
 Work through each notebook in order, starting with **part1-basic-knowledge-base.ipynb**. Each notebook explores a different knowledge base pattern and builds on concepts from previous parts.
 
-Once you've completed all 8 notebooks, select **Next** to review key takeaways and next steps.
+Once you've completed all 9 notebooks, select **Next** to review key takeaways and next steps.

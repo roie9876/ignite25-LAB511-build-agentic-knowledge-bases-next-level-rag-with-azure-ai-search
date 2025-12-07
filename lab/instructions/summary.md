@@ -1,6 +1,6 @@
 # Summary
 
-You've completed the lab on building agentic knowledge bases with Azure AI Search. Through 8 progressive notebooks, you explored how retrieval becomes intelligent when guided by a large language model that can plan searches, select sources, and generate grounded responses.
+You've completed the lab on building agentic knowledge bases with Azure AI Search. Through 9 progressive notebooks, you explored how retrieval becomes intelligent when guided by a large language model that can plan searches, select sources, and generate grounded responses. Parts 3 and 3B both use SharePoint—Part 3 shows remote (live-permission) retrieval, while Part 3B demonstrates the indexed, high-performance pattern.
 
 ## What You Explored
 
